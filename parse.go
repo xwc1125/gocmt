@@ -96,6 +96,31 @@ func buildComments(af *ast.File, commentTemplate string) (*ast.File, error) {
 func addFuncDeclComment(fd *ast.FuncDecl, commentTemplate string) {
 	if fd.Doc == nil || strings.TrimSpace(fd.Doc.Text()) == fd.Name.Name {
 		text := fmt.Sprintf(commentTemplate, fd.Name)
+		if fd.Type != nil {
+			if fd.Type.Params != nil {
+				for _, v := range fd.Type.Params.List {
+					for _, name := range v.Names {
+						text += fmt.Sprintf("\n// @%v: %v", name, v.Type)
+					}
+				}
+			}
+
+			if fd.Type.Results != nil {
+				text += "\n// returns:"
+				index := 1
+				for _, v := range fd.Type.Results.List {
+					if len(v.Names) == 0 {
+						// 未定义返回参数名
+						text += fmt.Sprintf("\n// #%d: %v", index, v.Type)
+					} else {
+						for _, name := range v.Names {
+							text += fmt.Sprintf("\n// @%v: %v", name, v.Type)
+						}
+					}
+				}
+			}
+		}
+
 		pos := fd.Pos() - token.Pos(1)
 		fd.Doc = &ast.CommentGroup{List: []*ast.Comment{{Slash: pos, Text: text}}}
 	}

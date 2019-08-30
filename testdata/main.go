@@ -17,8 +17,13 @@ func main() {
 
 func unexport(s string) {
 }
-func Export(s string) {
+
+func Export(s, s2 string, data string, list ...int) (d string, e, e2 error) {
+	return "", nil, nil
 }
 
+// 测试
+// fasdfasd
 func ExportWithComment(s string) {
+	// TODO after
 }
