@@ -1,11 +1,8 @@
 # gocmt - Add missing comment on exported function, method, type, constant, variable in go file
 
-[![Build Status](https://travis-ci.org/cuonglm/gocmt.svg?branch=master)](https://travis-ci.org/cuonglm/gocmt)
-[![Go Report Card](https://goreportcard.com/badge/github.com/cuonglm/gocmt)](https://goreportcard.com/report/github.com/cuonglm/gocmt)
-
 # Installation
 ```sh
-go get -u github.com/cuonglm/gocmt
+go get -u github.com/xwc1125/gocmt
 ```
 
 # Why gocmt
@@ -15,6 +12,11 @@ Some of my projects have many files with exported fields, variables, functions m
 I find a way to auto add missing comment to them, just to pass the lint tools but nothing existed.
 
 So `gocmt` comes in.
+
+# Used by Goland
+
+![](doc/desc.png)
+
 
 # Usage
 ```sh
@@ -98,4 +100,4 @@ Cuong Manh Le <cuong.manhle.vn@gmail.com>
 
 # License
 
-See [LICENSE](https://github.com/cuonglm/gocmt/blob/master/LICENSE)
+See [LICENSE](https://github.com/xwc1125/gocmt/blob/master/LICENSE)

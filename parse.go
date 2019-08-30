@@ -39,9 +39,9 @@ func buildComments(af *ast.File, commentTemplate string) (*ast.File, error) {
 		case *ast.FuncDecl:
 			fd := d.(*ast.FuncDecl)
 
-			if !fd.Name.IsExported() {
-				continue
-			}
+			//if !fd.Name.IsExported() {
+			//	continue
+			//}
 
 			addFuncDeclComment(fd, commentTemplate)
 			cmap[fd] = []*ast.CommentGroup{fd.Doc}
@@ -53,17 +53,17 @@ func buildComments(af *ast.File, commentTemplate string) (*ast.File, error) {
 			case token.CONST, token.VAR:
 				if gd.Lparen == token.NoPos && gd.Rparen == token.NoPos {
 					vs := gd.Specs[0].(*ast.ValueSpec)
-					if !vs.Names[0].IsExported() {
-						continue
-					}
+					//if !vs.Names[0].IsExported() {// 是否是暴露的
+					//	continue
+					//}
 					addValueSpecComment(gd, vs, commentTemplate)
 				} else {
 					// if there's a () add comment for each sub entry
 					for _, spec := range gd.Specs {
 						vs := spec.(*ast.ValueSpec)
-						if !vs.Names[0].IsExported() {
-							continue
-						}
+						//if !vs.Names[0].IsExported() {
+						//	continue
+						//}
 						addParenValueSpecComment(vs, commentTemplate)
 						cmap[vs] = []*ast.CommentGroup{vs.Doc}
 					}
@@ -72,9 +72,9 @@ func buildComments(af *ast.File, commentTemplate string) (*ast.File, error) {
 
 			case token.TYPE:
 				ts := gd.Specs[0].(*ast.TypeSpec)
-				if !ts.Name.IsExported() {
-					continue
-				}
+				//if !ts.Name.IsExported() {
+				//	continue
+				//}
 				addTypeSpecComment(gd, ts, commentTemplate)
 			default:
 				continue
